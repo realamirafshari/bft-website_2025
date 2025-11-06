@@ -1,26 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* --default-font-family: "Open Sans", sans-serif; */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* 🎯 Primary Brand Colors (from Figma tokens) */
+  --color-primary-main: #014a70; /* primary */
+  --color-primary-light: #edf7fd; /* primary-color */
+  --color-primary-hover: #003a56; /* darker shade */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* 🎯 Secondary */
+  --color-secondary-main: #0075c2; /* secoundry-color */
+  --color-secondary-light: #cfe4f4; /* secoundry-content */
+  --color-secondary-hover: #005a97;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* 🧱 Neutral / Backgrounds (from base-100 → base-500) */
+  --color-bg: #f8f8f8; /* base-100 */
+  --color-surface: #f5f5f4; /* base-200 */
+  --color-surface-2: #e6e4e3; /* base-300 */
+  --color-border: #d4d0ce; /* base-400 */
+  --color-divider: #a49d99; /* base-500 */
+
+  /* ✏️ Text Colors */
+  --color-text: #1b1816; /* base-content */
+  --color-sub-text: #6e6864; /* derived 60% */
+  --color-disabled-text: #a49d99; /* base-500 */
+  --color-text-light: #ffffff;
+
+  /* ✅ Status – Error */
+  --color-error: #e50006; /* error */
+  --color-error-bg: #fef2f2; /* error-content */
+  --color-error-border: #e50006;
+
+  /* ✅ Status – Warning */
+  --color-warning: #eeaf00; /* warning */
+  --color-warning-bg: #fcfae6; /* warning-content */
+  --color-warning-border: #eeaf00;
+
+  /* ✅ Info (از Primary استخراج شده) */
+  --color-info-bg: #edf7fd;
+  --color-info-text: #014a70;
+  --color-info-border: #0075c2;
+
+  /* ✅ Success (ساخته‌شده هماهنگ با پالت شما) */
+  --color-success-bg: #e9f7ef;
+  --color-success-text: #2e7d51;
+  --color-success-border: #b8e4c5;
+
+  /* 🆕 Special States */
+  --color-new-bg: #edf7fd;
+  --color-new-text: #014a70;
+  --color-new-border: #003a56;
+
+  /* 🌙 Dark Mode */
+  --dark-bg: #10171d; /* derived from primary */
+  --dark-surface: #0c1318;
+  --dark-text: #e6edf2; /* light neutral */
+  --dark-sub-text: #9aa6b1;
+  --dark-border: #22323f;
+  --dark-primary: #49a7d5; /* brightened primary */
+  --dark-primary-hover: #3a8cb6;
 }
