@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const PhoneBrandSection = () => {
   return (
-    <div>
+    <div className="container">
       <div className="divider mt-8 text-secondary-main">All Brands</div>
       <div className="flex  justify-between items-center mt-6">
         <Link href={"/"}>

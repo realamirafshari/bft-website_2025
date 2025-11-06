@@ -5,4 +5,4 @@ const SignupPage = () => {
   )
 }
 
-export default page
+export default SignupPage
