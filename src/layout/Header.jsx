@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { RiMenu4Line } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
+import NotificationHeader from "@/components/Home/NotificationHeader";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -65,15 +66,15 @@ const Header = () => {
 
         {/* Mobile Toggle Button */}
         <div className="lg:hidden">
-          <button className="btn text-xl bg-transparent shadow-none" onClick={openHandler}>
+          <button
+            className="btn text-xl bg-transparent shadow-none"
+            onClick={openHandler}
+          >
             {isOpen ? <MdOutlineClose /> : <RiMenu4Line />}
           </button>
         </div>
       </header>
-      <section className="bg-secondary-light h-10 text-secondary-main text-center font-semibold p-8 flex justify-center items-center">
-        Version 1.105 is now available! Read about the new features and fixes
-        from September.
-      </section>
+      <NotificationHeader />
     </>
   );
 };
