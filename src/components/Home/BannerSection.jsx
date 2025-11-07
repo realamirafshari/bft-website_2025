@@ -24,11 +24,11 @@ const BannerSection = () => {
       {/* Content Section */}
       <div className="relative flex flex-col gap-5 lg:gap-7 justify-evenly items-center lg:items-start text-center lg:text-left">
         {/* Main Title */}
-        <div className="space-y-2">
-          <h1 className="text-7xl md:text-8xl lg:text-9xl italic font-black bg-linear-to-r from-primary-light via-primary-light to-white bg-clip-text text-transparent drop-shadow-lg">
+        <div className="space-y-4">
+          <h1 className="text-8xl md:text-8xl lg:text-10xl italic font-black bg-linear-to-r from-primary-light via-primary-light to-white bg-clip-text text-transparent drop-shadow-lg">
             BFT
           </h1>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl italic font-bold text-primary-light ">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl italic font-bold text-primary-light ">
             Warm Up Version
           </h2>
         </div>
