@@ -6,9 +6,9 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <main className="container mx-auto px-6 ">
+    <main className="container mx-auto px-4 ">
      
-      <ContentSection />
+      {/* <ContentSection /> */}
       <BannerSection/>
       <PhoneBrandSection/>
     </main>

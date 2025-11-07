@@ -6,6 +6,7 @@ import { useState } from "react";
 import { RiMenu4Line } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
 import NotificationHeader from "@/components/Home/NotificationHeader";
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -13,64 +14,152 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex bg-white justify-evenly px-4 py-4 items-center relative">
+      <header className="  flex bg-white justify-between px-6 md:px-12 py-4 items-center relative transition-all shadow-sm border-b border-border">
         {/* Logo */}
-        <div className="">
-          <Image src={Logo} width={200} height={60} alt="BFT Logo" />
-        </div>
+        <Link href={"/"}>
+          <Image
+            src={Logo}
+            width={200}
+            height={60}
+            alt="BFT Logo"
+            className="drop-shadow-sm"
+          />
+        </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-10">
-          <ul className="flex flex-row gap-10 text-lg *:hover:text-secondary-main *:transition-all ">
+        <nav className="hidden lg:flex items-center gap-8">
+          <ul className="flex flex-row gap-8 text-lg font-medium">
             <li>
-              <Link href="/">Home</Link>
+              <Link
+                href="/"
+                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
+              >
+                Home
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary-main transition-all duration-300 group-hover:w-full"></span>
+              </Link>
             </li>
             <li>
-              <Link href="/support-models">Support Models</Link>
+              <Link
+                href="/support-models"
+                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
+              >
+                Support Models
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary-main transition-all duration-300 group-hover:w-full"></span>
+              </Link>
             </li>
             <li>
-              <Link href="/news">News</Link>
+              <Link
+                href="/news"
+                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
+              >
+                News
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sectext-secondary-main transition-all duration-300 group-hover:w-full"></span>
+              </Link>
             </li>
             <li>
-              <Link href="/help-center">Help</Link>
+              <Link
+                href="/help-center"
+                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
+              >
+                Help
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sectext-secondary-main transition-all duration-300 group-hover:w-full"></span>
+              </Link>
             </li>
           </ul>
           <Link
             href={"/signin"}
-            className="btn bg-primary-main text-primary-light border-none hover:bg-primary-hover transition-all"
+            className="px-6 py-3 bg-primary-main text-surface rounded-xl font-semibold hover:bg-primary-hover transition-all duration-300"
           >
             Signin / Signup
           </Link>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {isOpen && (
-          <nav className="absolute top-0 left-0 w-1/2 flex flex-col gap-8 bg-white min-h-screen p-6 shadow-xl lg:hidden z-50">
-            <ul className="flex flex-col gap-2 text-xl  *:rounded-xl *:hover:bg-base-300 *:hover:cursor-pointer *:p-4 *:hover:text-secondary-main *:transition-all ">
-              <Link href="/">Home</Link>
-
-              <Link href="/support-models">Support Models</Link>
-
-              <Link href="/news">News</Link>
-
-              <Link href="/help-center">Help</Link>
-            </ul>
-            <Link
-              href={"/login"}
-              className="btn bg-primary-main text-primary-light border-none"
-            >
-              Login / SignUp
-            </Link>{" "}
-          </nav>
+          <div
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={openHandler}
+          />
         )}
+
+        {/* Mobile Menu */}
+        <nav
+          className={`fixed top-0 left-0 w-80 h-full flex flex-col gap-8 bg-white p-8 shadow-2xl lg:hidden z-50 transform transition-transform duration-300 ${
+            isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          {/* Close Button */}
+          <div className="flex justify-between items-center mb-8">
+            <Image src={Logo} width={160} height={48} alt="BFT Logo" />
+            <button
+              className="p-2 rounded-lg hover:bg-surface  transition-colors"
+              onClick={openHandler}
+            >
+              <MdOutlineClose className="text-2xl text-text" />
+            </button>
+          </div>
+
+          <ul className="flex flex-col gap-2 flex-1">
+            <li>
+              <Link
+                href="/"
+                onClick={openHandler}
+                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/support-models"
+                onClick={openHandler}
+                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
+              >
+                Support Models
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/news"
+                onClick={openHandler}
+                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
+              >
+                News
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/help-center"
+                onClick={openHandler}
+                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
+              >
+                Help Center
+              </Link>
+            </li>
+          </ul>
+
+          <div className="pt-4 border-t border-border">
+            <Link
+              href={"/signin"}
+              onClick={openHandler}
+              className="w-full px-6 py-4 bg-primary-main text-surface rounded-xl font-semibold hover:bg-primary-hover transition-all duration-300 text-center block"
+            >
+              Signin / Signup
+            </Link>
+          </div>
+        </nav>
 
         {/* Mobile Toggle Button */}
         <div className="lg:hidden">
           <button
-            className="btn text-xl bg-transparent shadow-none"
+            className="p-3 rounded-xl hover:bg-surface transition-colors duration-300 border border-border"
             onClick={openHandler}
           >
-            {isOpen ? <MdOutlineClose /> : <RiMenu4Line />}
+            {isOpen ? (
+              <MdOutlineClose className="text-2xl" />
+            ) : (
+              <RiMenu4Line className="text-2xl" />
+            )}
           </button>
         </div>
       </header>

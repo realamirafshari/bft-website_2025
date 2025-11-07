@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${openSans.variable} antialiased bg-bg min-h-screen`}>
+      <body className={`${openSans.variable} antialiased bg-base-100 min-h-screen`}>
         <Header />
         {children}
       </body>
