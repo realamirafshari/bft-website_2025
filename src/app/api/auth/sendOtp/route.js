@@ -31,7 +31,7 @@ export async function POST(req) {
     });
 
     await transporter.sendMail({
-      from: `Cando Panel <${process.env.EMAIL_USER}>`,
+      from: `BFT Team`,
       to: email,
       subject: "Account Activation Code",
       html: `
@@ -43,7 +43,6 @@ export async function POST(req) {
       `,
     });
 
-    // ✅ ذخیره کوکی امن شامل hashedOtp + userInfo
     const response = NextResponse.json({
       message: "OTP sent successfully.",
     });
