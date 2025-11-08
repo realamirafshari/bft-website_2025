@@ -6,20 +6,20 @@ import SectionTitle from "./SectionTitle";
 
 const FeaturesSection = () => {
   return (
-    <section className="relative py-12">
+    <section className=" py-12">
       <div className=" container mx-auto">
         <SectionTitle titleText={"Everything You Need"} />
 
         <div className="flex flex-col gap-8 p-4  mx-auto mt-6">
-          <div className=" border border-border rounded-3xl p-8 transition-all duration-500 overflow-hidden">
+          <div className=" border border-primary rounded-3xl p-8 transition-all duration-500 overflow-hidden">
             <div className=" flex flex-col lg:flex-row items-center gap-8">
               {/* Text Content */}
               <div className="flex-1">
                 <div className="mb-6">
-                  <h1 className="font-black text-2xl md:text-3xl text-primary-main mb-3">
+                  <h1 className="font-black text-2xl md:text-3xl text-primary mb-3">
                     Extensive Device Compatibility
                   </h1>
-                  <div className="w-48 h-1 bg-secondary-main rounded-full mb-4"></div>
+                  <div className="w-48 h-1 bg-primary/50 rounded-full mb-4"></div>
                   <p className="text-text leading-relaxed text-lg">
                     BFT Tool supports thousands of device models, with new ones
                     added regularly. Every feature is rigorously tested to
@@ -33,26 +33,26 @@ const FeaturesSection = () => {
                 {/* Feature Points */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--color-secondary-main)] rounded-full"></div>
-                    <span className="text-[var(--color-text)] font-medium">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-primary font-medium">
                       Thousands of device models
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--color-secondary-main)] rounded-full"></div>
-                    <span className="text-[var(--color-text)] font-medium">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-primary font-medium">
                       Regular updates
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--color-secondary-main)] rounded-full"></div>
-                    <span className="text-[var(--color-text)] font-medium">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-primary font-medium">
                       MTK processor support
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--color-secondary-main)] rounded-full"></div>
-                    <span className="text-[var(--color-text)] font-medium">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-primary font-medium">
                       Low system footprint
                     </span>
                   </div>
@@ -71,13 +71,13 @@ const FeaturesSection = () => {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <section className="lg:w-1/2  border border-border rounded-2xl px-6 pt-6 transition-all duration-300 group overflow-hidden">
+            <section className="lg:w-1/2  border border-primary rounded-2xl px-6 pt-6 transition-all duration-300 group overflow-hidden">
               <div className="flex flex-col h-full">
                 <div className="flex-1">
-                  <h3 className="font-bold text-2xl text-primary-main mb-4">
+                  <h3 className="font-bold text-2xl text-primary mb-4">
                     Simple, Smart, Always Ready
                   </h3>
-                  <div className="w-48 h-1 bg-primary-main rounded-full mb-4"></div>
+                  <div className="w-48 h-1 bg-primary/50 rounded-full mb-4"></div>
 
                   <p className="text-text leading-relaxed mb-6 ">
                     BFT is designed to give you a seamless, hassle-free
@@ -99,14 +99,14 @@ const FeaturesSection = () => {
               </div>
             </section>
 
-            <section className="lg:w-1/2 border border-border rounded-2xl p-6 overflow-hidden">
+            <section className="lg:w-1/2 border border-primary rounded-2xl p-6 overflow-hidden">
               <div className="flex flex-col h-full">
-                <div className="flex-1 text-primary-main">
-                  <h3 className="font-black text-xl md:text-2xl mb-4 leading-tight">
+                <div className="flex-1 ">
+                  <h3 className="font-black  text-primary text-xl md:text-2xl mb-4 leading-tight">
                     Unlocks screen, file-based encryption (FBE) full-disk
                     encryption (FDE) and decrypts user passwords.
                   </h3>
-                  <div className="w-48 h-1 bg-primary-main/50 rounded-full mb-4"></div>
+                  <div className="w-48 h-1 bg-primary/50 rounded-full mb-4"></div>
                   <p className="leading-relaxed mb-6 text-text">
                     BFT is optimized for Xiaomi MTK phones, supporting Android
                     13 - 9 (up to MIUI 14). No need to read the full dump — it's

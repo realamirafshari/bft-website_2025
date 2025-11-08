@@ -1,65 +1,73 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-
 @import "tailwindcss";
+
 @plugin "daisyui";
 
-@theme {
-  /* --default-font-family: "Open Sans", sans-serif; */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.002 247.839);
+  --color-base-200: oklch(96% 0.003 264.542);
+  --color-base-300: oklch(92% 0.006 264.531);
+  --color-base-content: oklch(20% 0.042 265.755);
+  --color-primary: oklch(60% 0.126 221.723);
+  --color-primary-content: oklch(98% 0.019 200.873);
+  --color-secondary: oklch(54% 0.245 262.881);
+  --color-secondary-content: oklch(97% 0.014 254.604);
+  --color-accent: oklch(60% 0.118 184.704);
+  --color-accent-content: oklch(98% 0.014 180.72);
+  --color-neutral: oklch(37% 0.044 257.287);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(62% 0.214 259.815);
+  --color-info-content: oklch(97% 0.014 254.604);
+  --color-success: oklch(76% 0.233 130.85);
+  --color-success-content: oklch(98% 0.031 120.757);
+  --color-warning: oklch(70% 0.213 47.604);
+  --color-warning-content: oklch(98% 0.016 73.684);
+  --color-error: oklch(63% 0.237 25.331);
+  --color-error-content: oklch(97% 0.013 17.38);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.28125rem;
+  --size-field: 0.28125rem;
+  --border: 1.5px;
+  --depth: 0;
+  --noise: 0;
+}
 
-  /* 🎯 Primary Brand Colors (from Figma tokens) */
-  --color-primary-main: #014a70; /* primary */
-  --color-primary-light: #edf7fd; /* primary-color */
-  --color-primary-hover: #003a56; /* darker shade */
-
-  /* 🎯 Secondary */
-  --color-secondary-main: #0075c2; /* secoundry-color */
-  --color-secondary-light: #cfe4f4; /* secoundry-content */
-  --color-secondary-hover: #005a97;
-
-  /* 🧱 Neutral / Backgrounds (from base-100 → base-500) */
-  --color-bg: #f8f8f8; /* base-100 */
-  --color-surface: #f5f5f4; /* base-200 */
-  --color-surface-2: #e6e4e3; /* base-300 */
-  --color-border: #d4d0ce; /* base-400 */
-  --color-divider: #a49d99; /* base-500 */
-
-  /* ✏️ Text Colors */
-  --color-text: #1b1816; /* base-content */
-  --color-sub-text: #6e6864; /* derived 60% */
-  --color-disabled-text: #a49d99; /* base-500 */
-  --color-text-light: #ffffff;
-
-  /* ✅ Status – Error */
-  --color-error: #e50006; /* error */
-  --color-error-bg: #fef2f2; /* error-content */
-  --color-error-border: #e50006;
-
-  /* ✅ Status – Warning */
-  --color-warning: #eeaf00; /* warning */
-  --color-warning-bg: #fcfae6; /* warning-content */
-  --color-warning-border: #eeaf00;
-
-  /* ✅ Info (از Primary استخراج شده) */
-  --color-info-bg: #edf7fd;
-  --color-info-text: #014a70;
-  --color-info-border: #0075c2;
-
-  /* ✅ Success (ساخته‌شده هماهنگ با پالت شما) */
-  --color-success-bg: #e9f7ef;
-  --color-success-text: #2e7d51;
-  --color-success-border: #b8e4c5;
-
-  /* 🆕 Special States */
-  --color-new-bg: #edf7fd;
-  --color-new-text: #014a70;
-  --color-new-border: #003a56;
-
-  /* 🌙 Dark Mode */
-  --dark-bg: #10171d; /* derived from primary */
-  --dark-surface: #0c1318;
-  --dark-text: #e6edf2; /* light neutral */
-  --dark-sub-text: #9aa6b1;
-  --dark-border: #22323f;
-  --dark-primary: #49a7d5; /* brightened primary */
-  --dark-primary-hover: #3a8cb6;
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(28.822% 0.022 277.508);
+  --color-base-200: oklch(26.805% 0.02 277.508);
+  --color-base-300: oklch(24.787% 0.019 277.508);
+  --color-base-content: oklch(97.747% 0.007 106.545);
+  --color-primary: oklch(60% 0.126 221.723);
+  --color-primary-content: oklch(98% 0.019 200.873);
+  --color-secondary: oklch(74.202% 0.148 301.883);
+  --color-secondary-content: oklch(14.84% 0.029 301.883);
+  --color-accent: oklch(83.392% 0.124 66.558);
+  --color-accent-content: oklch(16.678% 0.024 66.558);
+  --color-neutral: oklch(39.445% 0.032 275.524);
+  --color-neutral-content: oklch(87.889% 0.006 275.524);
+  --color-info: oklch(88.263% 0.093 212.846);
+  --color-info-content: oklch(17.652% 0.018 212.846);
+  --color-success: oklch(87.099% 0.219 148.024);
+  --color-success-content: oklch(17.419% 0.043 148.024);
+  --color-warning: oklch(95.533% 0.134 112.757);
+  --color-warning-content: oklch(19.106% 0.026 112.757);
+  --color-error: oklch(68.22% 0.206 24.43);
+  --color-error-content: oklch(13.644% 0.041 24.43);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.28125rem;
+  --size-field: 0.28125rem;
+  --border: 1.5px;
+  --depth: 0;
+  --noise: 0;
 }

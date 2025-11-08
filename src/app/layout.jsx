@@ -16,12 +16,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // data-theme="dark"
   return (
-    <html lang="en">
-      <body className={`${openSans.variable} antialiased bg-base-100 min-h-screen`}>
+    <html lang="en" data-theme="dark">
+      <body className={` antialiased min-h-screen transition-all duration-200`}>
         <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

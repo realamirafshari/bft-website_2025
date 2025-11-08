@@ -2,167 +2,88 @@
 import Image from "next/image";
 import Logo from "../image/BFTLogo.svg";
 import Link from "next/link";
-import { useState } from "react";
-import { RiMenu4Line } from "react-icons/ri";
-import { MdOutlineClose } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { LuSunMedium, LuMoon, LuMenu } from "react-icons/lu";
 import NotificationHeader from "@/components/Home/NotificationHeader";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState("dark"); // مقدار اولیه امن
 
-  const openHandler = () => setIsOpen((prev) => !prev);
+  // مرحله 1: فقط روی کلاینت مقدار localStorage خونده میشه
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  // مرحله 2: هر وقت theme تغییر کرد → در localStorage ذخیره و روی html هم اعمال کن
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const themeHandler = (e) => {
+    setTheme(e.target.checked ? "light" : "dark");
+  };
 
   return (
     <>
-      <header className="  flex bg-white justify-between px-6 md:px-12 py-4 items-center relative transition-all shadow-sm border-b border-border">
-        {/* Logo */}
-        <Link href={"/"}>
-          <Image
-            src={Logo}
-            width={200}
-            height={60}
-            alt="BFT Logo"
-            className="drop-shadow-sm"
-          />
-        </Link>
+      <header className="navbar bg-base-100 border-b border-base-300 py-4 md:px-12 transition-all">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden mr-2"
+            >
+              <LuMenu className="text-2xl" />
+            </div>
+            <ul
+              tabIndex="-1"
+              className="menu menu-lg dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-4 shadow *:my-2 *:font-medium *:hover:text-primary"
+            >
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/">Support Model</Link></li>
+              <li><Link href="/">Whats New</Link></li>
+            </ul>
+          </div>
 
-        {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-8">
-          <ul className="flex flex-row gap-8 text-lg font-medium">
-            <li>
-              <Link
-                href="/"
-                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
-              >
-                Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary-main transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/support-models"
-                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
-              >
-                Support Models
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary-main transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/news"
-                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
-              >
-                News
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sectext-secondary-main transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/help-center"
-                className="text-text hover:text-secondary-main transition-all duration-300 relative py-2 group"
-              >
-                Help
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sectext-secondary-main transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
-          </ul>
-          <Link
-            href={"/signin"}
-            className="px-6 py-3 bg-primary-main text-surface rounded-xl font-semibold hover:bg-primary-hover transition-all duration-300"
-          >
-            Signin / Signup
+          <Link href="/">
+            <Image
+              src={Logo}
+              width={200}
+              alt="logo"
+            />
           </Link>
-        </nav>
+        </div>
 
-        {/* Mobile Menu Overlay */}
-        {isOpen && (
-          <div
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-            onClick={openHandler}
-          />
-        )}
-
-        {/* Mobile Menu */}
-        <nav
-          className={`fixed top-0 left-0 w-80 h-full flex flex-col gap-8 bg-white p-8 shadow-2xl lg:hidden z-50 transform transition-transform duration-300 ${
-            isOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          {/* Close Button */}
-          <div className="flex justify-between items-center mb-8">
-            <Image src={Logo} width={160} height={48} alt="BFT Logo" />
-            <button
-              className="p-2 rounded-lg hover:bg-surface  transition-colors"
-              onClick={openHandler}
-            >
-              <MdOutlineClose className="text-2xl text-text" />
-            </button>
-          </div>
-
-          <ul className="flex flex-col gap-2 flex-1">
-            <li>
-              <Link
-                href="/"
-                onClick={openHandler}
-                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/support-models"
-                onClick={openHandler}
-                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
-              >
-                Support Models
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/news"
-                onClick={openHandler}
-                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
-              >
-                News
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/help-center"
-                onClick={openHandler}
-                className="flex items-center p-4 rounded-xl text-text hover:bg-surface hover:text-secondary-main transition-all duration-300 font-medium border border-transparent hover:border-border"
-              >
-                Help Center
-              </Link>
-            </li>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal menu-lg px-1 font-medium *:hover:text-primary">
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/">Support Model</Link></li>
+            <li><Link href="/">Whats New</Link></li>
           </ul>
+        </div>
 
-          <div className="pt-4 border-t border-border">
-            <Link
-              href={"/signin"}
-              onClick={openHandler}
-              className="w-full px-6 py-4 bg-primary-main text-surface rounded-xl font-semibold hover:bg-primary-hover transition-all duration-300 text-center block"
-            >
-              Signin / Signup
-            </Link>
-          </div>
-        </nav>
+        <div className="navbar-end">
+          <label className="swap swap-rotate">
+            <input
+              type="checkbox"
+              onChange={themeHandler}
+              checked={theme === "light"}
+            />
 
-        {/* Mobile Toggle Button */}
-        <div className="lg:hidden">
-          <button
-            className="p-3 rounded-xl hover:bg-surface transition-colors duration-300 border border-border"
-            onClick={openHandler}
-          >
-            {isOpen ? (
-              <MdOutlineClose className="text-2xl" />
-            ) : (
-              <RiMenu4Line className="text-2xl" />
-            )}
-          </button>
+            <LuSunMedium className="swap-on text-3xl" />
+            <LuMoon className="swap-off text-3xl" />
+          </label>
+
+          <Link href="/signin" className="btn btn-primary ml-4">
+            Signin/Signup
+          </Link>
         </div>
       </header>
+
       <NotificationHeader />
     </>
   );

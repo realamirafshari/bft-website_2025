@@ -12,15 +12,15 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-secondary-light/50">
+    <footer className="w-full bg-base-300">
       <section className="flex flex-col border-b border-border justify-center items-center gap-6 py-12 px-4  ">
-        <h1 className="font-extrabold text-4xl md:text-5xl lg:text-6xl text-primary-main ">
+        <h1 className="font-extrabold text-4xl md:text-5xl lg:text-6xl  ">
           Follow Us
         </h1>
         <p className="text-text font-medium text-lg text-center max-w-md">
           Stay connected with the latest updates and news
         </p>
-        <div className="flex gap-6 text-3xl *:p-3 *:bg-white *:rounded-xl *:text-primary-main *:hover:text-secondary-main *:hover:scale-110 *:transition-all *:duration-300">
+        <div className="flex gap-6 text-3xl *:p-3 *:bg-white *:rounded-xl *:text-primary *:hover:text-primary *:hover:scale-110 *:transition-all *:duration-300">
           <Link href={"https://t.me/BrutalForensicTools"}>
             <FaTelegram />
           </Link>
@@ -56,10 +56,10 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className=" text-center lg:text-left">
-            <h3 className="font-bold text-xl text-primary-main mb-6 pb-2 border-b-2 border-secondary-main inline-block">
+            <h3 className="font-bold text-xl mb-6 pb-2 border-b-2 border-primary inline-block">
               Quick Access
             </h3>
-            <div className="flex flex-col gap-3  *:text-text  *:hover:text-primary-main  *:transition-colors *:duration-300 *:font-medium *:py-1   ">
+            <div className="flex flex-col gap-3  *:text-text  *:hover:text-primary  *:transition-colors *:duration-300 *:font-medium *:py-1   ">
               <Link href={"#"}>Home</Link>
               <Link href={"#"}>Features</Link>
               <Link href={"#"}>Support Models</Link>
@@ -69,7 +69,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className=" text-center lg:text-left">
-            <h3 className="font-bold text-xl text-primary-main mb-6 pb-2 border-b-2 border-secondary-main inline-block">
+            <h3 className="font-bold text-xl  mb-6 pb-2 border-b-2 border-primary inline-block">
               Contact Info
             </h3>
             <div className="flex flex-col gap-3 text-text dark:text-gray-300">
@@ -83,7 +83,7 @@ const Footer = () => {
 
       <section className="bg-primary-main/10 p-6 flex flex-col md:flex-row text-center gap-4 justify-evenly font-medium">
         <h1>© {currentYear} BFT Team - All rights reserved</h1>
-        <div className="*:px-2 *:text-secondary-main">
+        <div className="*:px-2 *:text-primary">
           <Link href={"#"}>Privacy policy </Link>
           <Link href={"#"}>Terms of service </Link>
         </div>
