@@ -4,20 +4,21 @@ import Logo from "../image/BFTLogo.svg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LuSunMedium, LuMoon, LuMenu } from "react-icons/lu";
+import { FaUserLarge } from "react-icons/fa6";
+
 import NotificationHeader from "@/components/Home/NotificationHeader";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState("dark"); // مقدار اولیه امن
+  const { data } = useSession();
+  const [theme, setTheme] = useState("dark");
 
-  // مرحله 1: فقط روی کلاینت مقدار localStorage خونده میشه
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
-  // مرحله 2: هر وقت theme تغییر کرد → در localStorage ذخیره و روی html هم اعمال کن
   useEffect(() => {
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
@@ -29,9 +30,9 @@ const Header = () => {
 
   return (
     <>
-      <header className="navbar bg-base-100 border-b border-base-300 py-4 md:px-12 transition-all">
+      <header className="navbar bg-base-100 border-b border-base-300 py-4 px-6 md:px-12 transition-all">
         <div className="navbar-start">
-          <div className="dropdown">
+          <div className="dropdown ">
             <div
               tabIndex={0}
               role="button"
@@ -43,26 +44,47 @@ const Header = () => {
               tabIndex="-1"
               className="menu menu-lg dropdown-content bg-base-100 rounded-box z-1 mt-4 w-52 p-4 shadow *:my-2 *:font-medium *:hover:text-primary"
             >
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/">Support Model</Link></li>
-              <li><Link href="/">Whats New</Link></li>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/">Support Model</Link>
+              </li>
+              <li>
+                <Link href="/">Whats New</Link>
+              </li>
+              <div className="divider"></div>
+              {data ? (
+                <Link
+                  className="btn btn-outline btn-primary hover:text-primary-content "
+                  href={"/dashboard"}
+                >
+                  <FaUserLarge />
+                </Link>
+              ) : (
+                <Link href="/signin" className="btn btn-primary ">
+                  Signin/Signup
+                </Link>
+              )}
             </ul>
           </div>
 
           <Link href="/">
-            <Image
-              src={Logo}
-              width={200}
-              alt="logo"
-            />
+            <Image src={Logo} width={200} alt="logo" />
           </Link>
         </div>
 
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal menu-lg px-1 font-medium *:hover:text-primary">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/">Support Model</Link></li>
-            <li><Link href="/">Whats New</Link></li>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/">Support Model</Link>
+            </li>
+            <li>
+              <Link href="/">Whats New</Link>
+            </li>
           </ul>
         </div>
 
@@ -77,10 +99,21 @@ const Header = () => {
             <LuSunMedium className="swap-on text-3xl" />
             <LuMoon className="swap-off text-3xl" />
           </label>
-
-          <Link href="/signin" className="btn btn-primary ml-4">
-            Signin/Signup
-          </Link>
+          {data ? (
+            <Link
+              className="btn btn-outline btn-primary hover:text-primary-content hidden lg:flex ml-4"
+              href={"/dashboard"}
+            >
+              <FaUserLarge />
+            </Link>
+          ) : (
+            <Link
+              href="/signin"
+              className="btn btn-primary hidden lg:flex ml-4 "
+            >
+              Signin/Signup
+            </Link>
+          )}
         </div>
       </header>
 
