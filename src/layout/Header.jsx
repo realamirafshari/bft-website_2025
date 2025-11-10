@@ -4,7 +4,6 @@ import Logo from "../image/BFTLogo.svg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LuSunMedium, LuMoon, LuMenu } from "react-icons/lu";
-import { FaUserLarge } from "react-icons/fa6";
 
 import NotificationHeader from "@/components/Home/NotificationHeader";
 import { useSession } from "next-auth/react";
@@ -56,10 +55,10 @@ const Header = () => {
               <div className="divider"></div>
               {data ? (
                 <Link
-                  className="btn btn-outline btn-primary hover:text-primary-content "
-                  href={"/dashboard"}
+                  className="btn btn-outline w-full btn-primary hover:text-primary-content "
+                  href={"/profile"}
                 >
-                  <FaUserLarge />
+                  Hello , {data.user.fullName}
                 </Link>
               ) : (
                 <Link href="/signin" className="btn btn-primary ">
@@ -102,9 +101,9 @@ const Header = () => {
           {data ? (
             <Link
               className="btn btn-outline btn-primary hover:text-primary-content hidden lg:flex ml-4"
-              href={"/dashboard"}
+              href={"/profile"}
             >
-              <FaUserLarge />
+              Hello , {data.user.fullName}
             </Link>
           ) : (
             <Link

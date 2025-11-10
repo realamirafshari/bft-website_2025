@@ -8,18 +8,18 @@ import toast from "react-hot-toast";
 
 export default function VerifyOtp({ email }) {
   const router = useRouter();
-  const [code, setCode] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [otpCode, setOtpCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const res = await fetch("/api/auth/verifyOtp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp: code }),
+        body: JSON.stringify({ email, otpCode: otpCode }),
       });
 
       const data = await res.json();
@@ -31,12 +31,12 @@ export default function VerifyOtp({ email }) {
 
       toast.success("Account created successfully!");
 
-      router.push("/signin");
+      setTimeout(() => router.push("/signin"), 1000);
     } catch (err) {
       console.error(err);
       toast.error("Server error.");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -51,8 +51,8 @@ export default function VerifyOtp({ email }) {
             inputMode="numeric"
             maxLength={6}
             pattern="\d{6}"
-            value={code}
-            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+            value={otpCode}
+            onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ""))}
             placeholder="••••••"
             className="text-center tracking-widest text-2xl font-semibold"
             required
@@ -61,10 +61,11 @@ export default function VerifyOtp({ email }) {
 
         <button
           type="submit"
-          className="btn btn-neutral mt-2"
-          disabled={loading}
+          className={`btn ${isLoading ? "btn-disabled" : "btn-neutral"} mt-2`}
         >
-          {loading ? "Verifying..." : "Verify"}
+          {isLoading && <span className="isLoading isLoading-spinner" />}
+
+          {isLoading ? "Verifying..." : "Verify"}
         </button>
       </fieldset>
     </form>

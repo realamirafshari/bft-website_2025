@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaUserLarge, FaAt, FaLock } from "react-icons/fa6";
 import VerifyOtp from "./VerifyOtp";
+import Link from "next/link";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("amir");
@@ -32,7 +33,8 @@ const Signup = () => {
       }
 
       toast.success("OTP sent successfully!");
-      setStep(2);
+      setTimeout(() => setStep(2), 1000);
+      
     } catch (err) {
       console.error("SIGNUP ERROR:", err);
       toast.error("Server error. Try again later.");
@@ -90,11 +92,20 @@ const Signup = () => {
 
             <button
               type="submit"
-              className={`btn mt-4 ${isLoading ? "btn-disabled" : "btn-neutral"}`}
+              className={`btn mt-4 ${
+                isLoading ? "btn-disabled" : "btn-neutral"
+              }`}
             >
               {isLoading && <span className="loading loading-spinner" />}
               {isLoading ? "Loading..." : "Create Account"}
             </button>
+
+            <h1 className="mx-auto mt-2">
+              If you already have an account ,
+              <Link href={"/signin"} className="text-primary underline">
+                Signin
+              </Link>
+            </h1>
           </fieldset>
         </form>
       )}

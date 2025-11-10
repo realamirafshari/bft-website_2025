@@ -1,19 +1,18 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import { connectDB } from "@/utils/connectDB";
 import User from "@/models/User";
-import { hashPassword } from "@/utils/authentication";
+import { hashValue, verifyValue } from "@/utils/authentication";
 
 export async function POST(req) {
   try {
     await connectDB();
 
-    const { otp } = await req.json();
-    if (!otp) {
+    const { otpCode } = await req.json();
+    if (!otpCode) {
       return NextResponse.json({ error: "OTP is required." }, { status: 422 });
     }
 
-    const cookie = req.cookies.get("otp_data");
+    const cookie = req.cookies.get("Verification_Token");
     if (!cookie) {
       return NextResponse.json(
         { error: "OTP expired or missing." },
@@ -21,27 +20,27 @@ export async function POST(req) {
       );
     }
 
-    const { email, fullName, password, hashedOtp } = JSON.parse(cookie.value);
+    const { email, fullName, hashedPassword, hashedOtp } = JSON.parse(
+      cookie.value
+    );
 
-    // ✅ مقایسه OTP
-    const isMatch = await bcrypt.compare(otp, hashedOtp);
+    const isMatch = await verifyValue(otpCode, hashedOtp);
     if (!isMatch) {
       return NextResponse.json({ error: "Invalid OTP." }, { status: 401 });
     }
 
-    // ✅ ایجاد یوزر
     const user = new User({
       fullName,
       email,
-      password: await hashPassword(password),
+      password: hashedPassword,
+      isVerified: true,
     });
     await user.save();
 
-    // ✅ حذف کوکی OTP
     const response = NextResponse.json({
       message: "Account created and logged in successfully!",
     });
-    response.cookies.set("otp_data", "", { maxAge: 0 });
+    response.cookies.set("Verification_Token", "", { maxAge: 0 });
 
     return response;
   } catch (error) {

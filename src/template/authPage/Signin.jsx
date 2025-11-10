@@ -10,16 +10,18 @@ const Signin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("amirafshari02@gmail.com");
   const [password, setPassword] = useState("Amir_Afshari#1382");
+  const [isLoading, setIsLoading] = useState(false);
 
   const signinHandler = async (e) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
-      toast.error("مقادیر نمی‌توانند خالی باشند");
+      toast.error("Values cannot be empty");
       return;
     }
 
     try {
+      setIsLoading(true);
       const res = await signIn("credentials", {
         email,
         password,
@@ -27,25 +29,31 @@ const Signin = () => {
       });
 
       if (!res) {
-        toast.error("خطا در ارتباط با سرور");
+        toast.error("Failed to fetch data");
+        setIsLoading(false);
         return;
       }
 
       if (res.error) {
         toast.error(res.error);
+        setIsLoading(false);
         return;
       }
-      toast.success("ورود با موفقیت انجام شد");
+      toast.success("Login Successfully");
+      setIsLoading(false);
       router.push("/");
     } catch (err) {
       console.error(err);
-      toast.error("خطا در ارتباط با سرور ...");
+      toast.error("Error connecting to the server...");
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
-    <div className=" flex justify-center py-32">
+    <div className=" flex flex-col justify-center py-32">
       <Toaster position="top-center" reverseOrder={false} />
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto">
         <legend className="fieldset-legend">Login</legend>
 
         <label className="label">Email</label>
@@ -113,11 +121,21 @@ const Signin = () => {
           At least one uppercase letter
         </p>
 
-        <button className="btn btn-neutral mt-4" onClick={signinHandler}>
-          Login
+        <button
+          className={`btn ${isLoading ? "btn-disabled" : "btn-neutral"} mt-4`}
+          onClick={signinHandler}
+        >
+          {isLoading && <span className="loading loading-spinner" />}
+          {isLoading ? "Login ..." : "Login"}
         </button>
+
+        <h1 className="mx-auto mt-2">
+          Don't have an account ?{" "}
+          <Link href={"/signup"} className="text-primary underline">
+            SignUp and get started
+          </Link>
+        </h1>
       </fieldset>
-      <Link href={"/signup"}>SignUp</Link>
     </div>
   );
 };
