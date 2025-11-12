@@ -57,7 +57,7 @@ const ProfilePage = async () => {
                 </div>
               </div>
 
-              <Tabbar session={session} />
+              <Tabbar />
             </div>
           </div>
         </div>
