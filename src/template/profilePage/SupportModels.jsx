@@ -1,15 +1,14 @@
+import SupportModelsForm from "@/components/profilePage/SupportModelsForm";
+import PhoneBrand from "@/models/PhoneBrands";
+import SupportModels from "@/models/SupportModels";
+import { connectDB } from "@/utils/connectDB";
+import { FaPen, FaTrash } from "react-icons/fa6";
+
 const SupportModelsPage = async () => {
   await connectDB();
-
   const brand = await PhoneBrand.find({}).lean();
-
-  if (!brand || brand.length === 0) {
-    throw new Error("هیچ برندی پیدا نشد!");
-  }
-
   const Models = await SupportModels.find({});
   const plainBrand = JSON.parse(JSON.stringify(brand));
-
   return (
     <div>
       <SupportModelsForm brand={plainBrand} />
@@ -43,3 +42,5 @@ const SupportModelsPage = async () => {
     </div>
   );
 };
+
+export default SupportModelsPage;
