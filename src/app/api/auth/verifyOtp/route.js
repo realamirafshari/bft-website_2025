@@ -44,7 +44,6 @@ export async function POST(req) {
 
     return response;
   } catch (error) {
-    console.log("OTP ERROR >>> ", error);
     return NextResponse.json({ error: "Server error." }, { status: 500 });
   }
 }

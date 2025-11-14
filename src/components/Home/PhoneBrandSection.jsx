@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const PhoneBrandSection = async () => {
   await connectDB();
-  const brandList = await PhoneBrand.find({});
+  const brandList = await PhoneBrand.find({}).lean();
   return (
     <div className=" pt-12 ">
       <SectionTitle titleText={"Supported Brands"} />
@@ -14,7 +14,7 @@ const PhoneBrandSection = async () => {
         {brandList.map((brand) => (
           <Link
             href={`/models/${brand.brandName}`}
-            key={brand.id}
+            key={brand._id}
             className="group  rounded-2xl flex justify-center items-center  transition-all   border border-primary hover:scale-110  duration-500 p-6"
           >
             <div className="">

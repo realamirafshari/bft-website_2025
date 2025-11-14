@@ -2,43 +2,19 @@ import SupportModelsForm from "@/components/profilePage/SupportModelsForm";
 import PhoneBrand from "@/models/PhoneBrands";
 import SupportModels from "@/models/SupportModels";
 import { connectDB } from "@/utils/connectDB";
-import { FaPen, FaTrash } from "react-icons/fa6";
+
+import SupportModelsList from "./SupportModelsList";
 
 const SupportModelsPage = async () => {
   await connectDB();
   const brand = await PhoneBrand.find({}).lean();
-  const Models = await SupportModels.find({});
+  const Models = await SupportModels.find({}).lean();
   const plainBrand = JSON.parse(JSON.stringify(brand));
+  const plainModels = JSON.parse(JSON.stringify(Models));
   return (
     <div>
       <SupportModelsForm brand={plainBrand} />
-      {Models.map((model) => (
-        <ul key={model._id} className="list gap-2 rounded-box shadow-sm mt-4">
-          <li className="list-row">
-            <div>
-              <img
-                className="size-10 rounded-box"
-                src={model.image}
-                alt={model.modelName}
-              />
-            </div>
-            <div>
-              <div className="text-primary uppercase font-semibold ">
-                {model.modelName}
-              </div>
-              <div>
-                <h1 className="text-secondary">{model.brandName}</h1>
-              </div>
-            </div>
-            <button className="btn btn-square btn-ghost">
-              <FaPen />
-            </button>
-            <button className="btn btn-square btn-ghost">
-              <FaTrash />
-            </button>
-          </li>
-        </ul>
-      ))}
+      <SupportModelsList modelList={plainModels} />
     </div>
   );
 };

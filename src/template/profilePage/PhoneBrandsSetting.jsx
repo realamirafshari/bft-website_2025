@@ -27,7 +27,6 @@ const PhoneBrandsSetting = () => {
         headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();
-      console.log(data);
     } catch (error) {
       console.error("Error fetching brands:", error);
     }

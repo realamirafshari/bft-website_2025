@@ -22,7 +22,6 @@ const PhoneBrandForm = () => {
     if (!res.ok) {
       toast.error("this brand already exist");
     } else {
-      console.log(res);
       toast.success("Brand Created");
       setBrandName("");
       setBrandLogo("");
