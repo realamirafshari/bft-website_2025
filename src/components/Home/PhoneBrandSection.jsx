@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const PhoneBrandSection = async () => {
   await connectDB();
-  const brandList = await PhoneBrand.find();
+  const brandList = await PhoneBrand.find({});
   return (
     <div className=" pt-12 ">
       <SectionTitle titleText={"Supported Brands"} />
