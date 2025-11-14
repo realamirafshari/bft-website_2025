@@ -1,6 +1,6 @@
 import SectionTitle from "./SectionTitle";
 import { connectDB } from "@/utils/connectDB";
-import PhoneBrand from "@/models/PhoneBrans";
+import PhoneBrand from "@/models/PhoneBrands";
 import Link from "next/link";
 
 const PhoneBrandSection = async () => {

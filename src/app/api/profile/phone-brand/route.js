@@ -1,4 +1,4 @@
-import PhoneBrand from "@/models/PhoneBrans";
+import PhoneBrand from "@/models/PhoneBrands";
 import { connectDB } from "@/utils/connectDB";
 import { NextResponse } from "next/server";
 
@@ -36,13 +36,15 @@ export async function GET() {
   }
 }
 
-
 export async function DELETE(req) {
   try {
     await connectDB();
-    const {id}= await req.json()
-     await PhoneBrand.deleteOne({_id:id});
-    return NextResponse.json({message:"Delete successfully"}, { status: 200 });
+    const { id } = await req.json();
+    await PhoneBrand.deleteOne({ _id: id });
+    return NextResponse.json(
+      { message: "Delete successfully" },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
