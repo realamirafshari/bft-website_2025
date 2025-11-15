@@ -7,7 +7,7 @@ const NotificationHeader = () => {
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary  opacity-75"></span>
         <span className="relative inline-flex size-3 rounded-full bg-primary"></span>
       </span>{" "}
-      <h1 className="">Warm Up Version is now available!</h1>{" "}
+      <h1 className="">Brutal Forensic Tool is now available!</h1>{" "}
     </section>
   );
 };

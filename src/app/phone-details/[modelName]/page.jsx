@@ -107,7 +107,7 @@ const PhoneDetailsPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-info/10 rounded-lg p-4 border-r-4 border-info">
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col gap-2 justify-between items-center">
                       <span className="text-info font-medium">
                         Android Version
                       </span>
@@ -118,7 +118,7 @@ const PhoneDetailsPage = () => {
                   </div>
 
                   <div className="bg-success/10 rounded-lg p-4 border-r-4 border-success">
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col gap-2 justify-between items-center">
                       <span className=" text-success font-medium">Chipset</span>
                       <span className="badge badge-success font-semibold">
                         {model.chipset}
@@ -141,7 +141,7 @@ const PhoneDetailsPage = () => {
                       className="flex gap-4 items-center  rounded-lg p-3 hover:bg-base-200 border border-base-300 transition-colors"
                     >
                       <div className="w-2 h-2 bg-primary rounded-full ml-3"></div>
-                      <span className="">{feature}</span>
+                      <span className="text-primary">{feature}</span>
                     </div>
                   ))}
                 </div>

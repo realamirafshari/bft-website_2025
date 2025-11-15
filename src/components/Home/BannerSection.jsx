@@ -24,31 +24,31 @@ const BannerSection = () => {
       {/* Content Section */}
       <div className=" flex flex-col gap-5 lg:gap-7 justify-evenly items-center lg:items-start text-center lg:text-left">
         {/* Main Title */}
-        <div className="space-y-4">
-          <h1 className="text-8xl md:text-8xl lg:text-10xl italic font-black text-white drop-shadow-lg">
-            BFT
+        <div className="space-y-6">
+          <h1 className="text-6xl md:text-5xl lg:text-7xl italic font-black text-white drop-shadow-lg">
+            Brutal Forensic Tool
           </h1>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl italic font-bold text-white ">
-            Warm Up Version
+          <h2 className="text-4xl md:text-3xl lg:text-4xl italic text-white ">
+            Professional Mobile Forensic Tool
           </h2>
         </div>
 
         {/* Subtitle */}
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white">
+        <h3 className="text-4xl  font-semibold text-white">
           Available Now
         </h3>
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-2">
           <Link
-            href={"/"}
+            href={"/whats-new"}
             className="btn btn-lg "
           >
             <span className="">UPDATE NEWS</span>
           </Link>
 
           <Link
-            href={"/"}
+            href={"/models"}
             className="btn btn-outline btn-lg"
           >
             MODELS
