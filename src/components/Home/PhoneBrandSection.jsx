@@ -1,11 +1,19 @@
+"use client"
 import SectionTitle from "./SectionTitle";
-import { connectDB } from "@/utils/connectDB";
-import PhoneBrand from "@/models/PhoneBrands";
+import {useEffect}from "react"
 import Link from "next/link";
 
 const PhoneBrandSection = async () => {
-  await connectDB();
-  const brandList = await PhoneBrand.find({}).lean();
+const [brandList,setBrandList]=useState([])
+  useEffect(()=>{
+const fetchHandler =async()=>{
+const res = await fetch("/api/profile/phone-brand)
+const data = await res.json()
+setBrandList(data)
+}
+
+fetchHandler()
+},[])
   return (
     <div className=" pt-12 ">
       <SectionTitle titleText={"Supported Brands"} />
