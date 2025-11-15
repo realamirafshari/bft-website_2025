@@ -56,3 +56,52 @@ export async function GET() {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
+
+export async function PUT(req) {
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id"); // گرفتن id از query
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "Model id is required" },
+        { status: 400 }
+      );
+    }
+
+    const body = await req.json();
+
+    if (!body.brandName || !body.modelName) {
+      return NextResponse.json(
+        { message: "brandName and modelName are required" },
+        { status: 400 }
+      );
+    }
+
+    if (typeof body.features === "string") {
+      body.features = body.features.split(",").map((f) => f.trim());
+    }
+
+    const updatedModel = await SupportModels.findByIdAndUpdate(
+      id,
+      { $set: body },
+      { new: true }
+    );
+
+    if (!updatedModel) {
+      return NextResponse.json({ message: "Model not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { message: "Model updated successfully", model: updatedModel },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("Error updating model:", err);
+    return NextResponse.json(
+      { message: "Failed to update model", error: err.message },
+      { status: 500 }
+    );
+  }
+}

@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const SupportModelsForm = ({ brand }) => {
+const SupportModelsForm = ({ brand, editModel, onUpdate }) => {
   const [brandName, setBrandName] = useState("");
   const [modelName, setModelName] = useState("");
   const [modelType, setModelType] = useState("");
@@ -12,14 +12,36 @@ const SupportModelsForm = ({ brand }) => {
   const [features, setFeatures] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const addModelHandler = async (e) => {
+  useEffect(() => {
+    if (editModel) {
+      setBrandName(editModel.brandName);
+      setModelName(editModel.modelName);
+      setModelType(editModel.modelType || "");
+      setChipset(editModel.chipset || "");
+      setAndroidVersion(editModel.androidVersion || "");
+      setImage(editModel.image || "");
+      setFeatures(editModel.features?.join(", ") || "");
+    } else {
+      setBrandName("");
+      setModelName("");
+      setModelType("");
+      setChipset("");
+      setAndroidVersion("");
+      setImage("");
+      setFeatures("");
+    }
+  }, [editModel]);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
 
     try {
-      const res = await fetch("/api/profile/support-models", {
-        method: "POST",
+      const method = editModel ? "PUT" : "POST";
+      const url = "/api/profile/support-models" + (editModel ? `?id=${editModel._id}` : "");
+
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           brandName,
@@ -28,14 +50,14 @@ const SupportModelsForm = ({ brand }) => {
           chipset,
           androidVersion,
           image,
-          featurs: features.split(",").map((f) => f.trim()),
+          features: features.split(",").map((f) => f.trim()),
         }),
       });
 
       const data = await res.json();
-      console.log(data)
+
       if (res.ok) {
-        toast.success("Add Successfuly"); 
+        toast.success(editModel ? "Updated Successfully" : "Added Successfully");
         setBrandName("");
         setModelName("");
         setModelType("");
@@ -43,11 +65,12 @@ const SupportModelsForm = ({ brand }) => {
         setAndroidVersion("");
         setImage("");
         setFeatures("");
+        if (onUpdate) onUpdate();
       } else {
-        toast.error("somthing went wrong ...");
+        toast.error(data.message || "Something went wrong");
       }
     } catch (error) {
-      toast.error("Faild To Fetch");
+      toast.error("Failed to fetch");
     } finally {
       setLoading(false);
     }
@@ -57,16 +80,17 @@ const SupportModelsForm = ({ brand }) => {
     <div className="flex gap-4">
       <Toaster />
       <form
-        onSubmit={addModelHandler}
+        onSubmit={submitHandler}
         className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
       >
-        <legend className="fieldset-legend">Supported Brand</legend>
+        <legend className="fieldset-legend">{editModel ? "Edit Model" : "Add Model"}</legend>
 
         <label className="label">Brand Name</label>
         <select
           value={brandName}
           className="select select-neutral"
           onChange={(e) => setBrandName(e.target.value)}
+          required
         >
           <option value="">Select Brand</option>
           {brand.map((item) => (
@@ -131,12 +155,11 @@ const SupportModelsForm = ({ brand }) => {
           onChange={(e) => setFeatures(e.target.value)}
         />
 
-
         <button
           className="btn btn-neutral mt-4"
-          disabled={loading || !brandName}
+          disabled={loading || !brandName || !modelName}
         >
-          {loading ? "Adding ..." : "Add New Model"}
+          {loading ? (editModel ? "Updating ..." : "Adding ...") : editModel ? "Update Model" : "Add New Model"}
         </button>
       </form>
     </div>

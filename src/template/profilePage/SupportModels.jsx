@@ -1,20 +1,20 @@
-import SupportModelsForm from "@/components/profilePage/SupportModelsForm";
+import SupportModelWrapper from "./SupportModelWrapper";
 import PhoneBrand from "@/models/PhoneBrands";
 import SupportModels from "@/models/SupportModels";
 import { connectDB } from "@/utils/connectDB";
 
-import SupportModelsList from "./SupportModelsList";
-
 const SupportModelsPage = async () => {
   await connectDB();
-  const brand = await PhoneBrand.find({}).lean();
-  const Models = await SupportModels.find({}).lean();
-  const plainBrand = JSON.parse(JSON.stringify(brand));
-  const plainModels = JSON.parse(JSON.stringify(Models));
+
+  const brands = await PhoneBrand.find({}).lean();
+  const models = await SupportModels.find({}).lean();
+
+  const plainBrands = JSON.parse(JSON.stringify(brands));
+  const plainModels = JSON.parse(JSON.stringify(models));
+
   return (
-    <div>
-      <SupportModelsForm brand={plainBrand} />
-      <SupportModelsList modelList={plainModels} />
+    <div className="p-8">
+      <SupportModelWrapper initialBrands={plainBrands} initialModels={plainModels} />
     </div>
   );
 };

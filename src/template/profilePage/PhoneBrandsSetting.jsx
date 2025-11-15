@@ -1,5 +1,5 @@
 "use client";
-import PhoneBrandForm from "@/components/profilePage/PhoneBrandForm";
+import PhoneBrandForm from "@/template/profilePage/PhoneBrandForm";
 import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 
