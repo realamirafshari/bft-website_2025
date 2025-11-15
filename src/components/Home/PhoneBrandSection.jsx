@@ -12,8 +12,10 @@ const data = await res.json()
 setBrandList(data)
 }
 
+
+}
 fetchHandler()
-},[])
+,[])
   return (
     <div className=" pt-12 ">
       <SectionTitle titleText={"Supported Brands"} />
