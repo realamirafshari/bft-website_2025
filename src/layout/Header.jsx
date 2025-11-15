@@ -50,7 +50,7 @@ const Header = () => {
                 <Link href="/models">Support Model</Link>
               </li>
               <li>
-                <Link href="/">Whats New</Link>
+                <Link href="/whats-new">Whats New</Link>
               </li>
               <div className="divider"></div>
               {data ? (
@@ -69,7 +69,7 @@ const Header = () => {
           </div>
 
           <Link href="/">
-            <Image src={Logo} width={200} alt="logo" />
+            <Image src={Logo} width={200} height={60} alt="logo" />
           </Link>
         </div>
 
@@ -82,7 +82,7 @@ const Header = () => {
               <Link href="/models">Support Model</Link>
             </li>
             <li>
-              <Link href="/">Whats New</Link>
+              <Link href="/whats-new">Whats New</Link>
             </li>
           </ul>
         </div>

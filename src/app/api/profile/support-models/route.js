@@ -46,3 +46,13 @@ export async function DELETE(req) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    await connectDB();
+    const brands = await SupportModels.find({});
+    return NextResponse.json(brands, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  }
+}

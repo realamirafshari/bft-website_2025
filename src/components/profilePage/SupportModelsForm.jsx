@@ -28,13 +28,14 @@ const SupportModelsForm = ({ brand }) => {
           chipset,
           androidVersion,
           image,
-          featurs: features.split(",").map((f) => f.trim()), // 👈 تبدیل رشته به آرایه
+          featurs: features.split(",").map((f) => f.trim()),
         }),
       });
 
       const data = await res.json();
+      console.log(data)
       if (res.ok) {
-        toast.success("Add Successfuly"); // پاک کردن فرم بعد از موفقیت
+        toast.success("Add Successfuly"); 
         setBrandName("");
         setModelName("");
         setModelType("");
@@ -129,6 +130,7 @@ const SupportModelsForm = ({ brand }) => {
           value={features}
           onChange={(e) => setFeatures(e.target.value)}
         />
+
 
         <button
           className="btn btn-neutral mt-4"

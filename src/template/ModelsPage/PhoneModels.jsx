@@ -1,89 +1,151 @@
 "use client";
-import { IoIosPhonePortrait } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
-
-import { useParams } from "next/navigation";
-import Image from "next/image";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useState, useMemo } from "react";
 import ModelCard from "@/components/supportModel/ModelCard";
+import { FaRegFaceSmile } from "react-icons/fa6";
 
 const PhoneModels = ({ phoneModels }) => {
+  const router = useRouter();
   const { phoneModels: phoneParam } = useParams();
-  // --- Search State ---
   const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredPhone = phoneModels.filter(
-    (item) => item.brandName.toLowerCase() === phoneParam.toLowerCase()
-  );
-  const searchedPhones = filteredPhone.filter(
-    (item) =>
-      item.modelName.toLowerCase().includes(search.toLowerCase()) ||
-      item.brandName.toLowerCase().includes(search.toLowerCase())
-  );
+  const { filteredPhone, searchedPhones } = useMemo(() => {
+    const brandFiltered = phoneModels.filter(
+      (item) => item.brandName?.toLowerCase() === phoneParam?.toLowerCase()
+    );
+
+    const searchFiltered = brandFiltered.filter(
+      (item) =>
+        item.modelName?.toLowerCase().includes(search.toLowerCase()) ||
+        item.modelType?.toLowerCase().includes(search.toLowerCase())
+    );
+
+    return { filteredPhone: brandFiltered, searchedPhones: searchFiltered };
+  }, [phoneModels, phoneParam, search]);
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleBackToHome = () => {
+    setIsLoading(true);
+    router.push("/");
+  };
+
+  if (!phoneParam) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-error text-6xl mb-4">⚠️</div>
+          <h3 className="text-xl font-bold  mb-2">Invalid Brand</h3>
+          <p className=" mb-4">Brand parameter is missing</p>
+          <button onClick={handleBackToHome} className="btn btn-primary">
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="p-4 md:p-8 bg-linear-to-br from-gray-50 to-blue-50 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
-            Supported Models of {phoneParam}
+    <div className="min-h-screen  py-8">
+      <div className="container mx-auto px-4">
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold  mb-3">
+            Supported <span className="text-primary">{phoneParam.toUpperCase()}</span> Models
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base px-4">
-            All supported models of {phoneParam} brand with complete details and
-            features of each device
+          <p className=" text-lg max-w-2xl mx-auto">
+            Explore all supported {phoneParam} models with complete
+            specifications and features
           </p>
-          {/* Search Section */}
-          <div className="max-w-md mx-auto mb-6 md:mb-10">
-            <div className="flex items-center   rounded-xl px-4 py-3 ">
-              <label className="input">
-                <IoSearchOutline className="size-5" />
-                <input
-                  type="text"
-                  className="grow"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search Model Nam ..."
-                />
-              </label>
+        </div>
+
+        {/* Search Section */}
+        <div className="  mb-8">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex w-full pointer-events-none">
+              <IoSearchOutline className="h-5 w-5" />
             </div>
+            <input
+              type="text"
+              className=" input "
+              value={search}
+              onChange={handleSearchChange}
+              placeholder="Search Model Name or Model Type..."
+            />
           </div>
         </div>
 
-        {/* Phone Models Grid */}
-        {filteredPhone.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            {searchedPhones.map((item) => (
-              <ModelCard key={item._id} item={item}/>
-            ))}
-          </div>
-        ) : (
-          /* Empty State */
-          <div className="text-center py-12 md:py-16 bg-white rounded-2xl shadow-sm border border-gray-200 max-w-2xl mx-auto">
-            <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-              <svg
-                className="w-12 h-12 md:w-16 md:h-16 text-gray-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl md:text-2xl font-bold text-gray-700 mb-2 md:mb-3">
-              No Models Found
-            </h3>
-            <p className="text-gray-500 text-sm md:text-lg max-w-md mx-auto px-4">
-              Unfortunately, no models have been registered for the {phoneParam}{" "}
-              brand in the system.
+        {/* Results Info */}
+        {search && (
+          <div className="text-center mb-6">
+            <p className="">
+              Found
+              <span className="font-semibold text-info">
+                {searchedPhones.length}
+              </span>
+              models matching "{search}"
             </p>
-            <button className="mt-4 md:mt-6 bg-blue-600 text-white px-5 md:px-6 py-2 md:py-2.5 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm md:text-base">
-              Back to Home
-            </button>
+          </div>
+        )}
+
+        {/* Models Grid */}
+        {filteredPhone.length > 0 ? (
+          <>
+            {searchedPhones.length === 0 ? (
+              <div className="text-center py-12  rounded-2xl border border-base-300">
+                <div className=" text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-bold  mb-2">No Models Found</h3>
+                <p className=" mb-6">
+                  No models found for "{search}". Try different search terms.
+                </p>
+                <button
+                  onClick={() => setSearch("")}
+                  className="btn btn-outline"
+                >
+                  Clear Search
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {searchedPhones.map((item) => (
+                  <ModelCard
+                    key={item._id}
+                    item={item}
+                    className="transform hover:scale-105 transition-transform duration-200"
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          /* Empty State - No models for brand */
+          <div className="text-center py-16  max-w-2xl mx-auto">
+            <div className=" mx-auto mb-6  rounded-full flex items-center justify-center">
+              <FaRegFaceSmile className="text-8xl" />
+
+            </div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-3">
+              No Models Available
+            </h3>
+            <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+              Currently, there are no supported models registered for the{" "}
+              <span className="font-semibold">{phoneParam}</span> brand in our
+              system.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={handleBackToHome}
+                className="btn btn-primary"
+                disabled={isLoading}
+              >
+                {isLoading ? "Loading..." : "Back to Home"}
+              </button>
+             
+            </div>
           </div>
         )}
       </div>

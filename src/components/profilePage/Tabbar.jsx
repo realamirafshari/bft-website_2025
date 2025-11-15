@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import PhoneBrandsSetting from "@/template/profilePage/PhoneBrandsSetting";
 import SupportModels from "@/template/profilePage/SupportModels";
+import UpdateNews from "@/template/profilePage/UpdateNews";
 import UserInformation from "@/template/profilePage/UserInformation";
 import { getServerSession } from "next-auth";
 
@@ -40,6 +41,16 @@ const Tabbar = async () => {
           />
           <div className="tab-content  p-4">
             <SupportModels />
+          </div>
+
+          <input
+            type="radio"
+            name="my_tabs_2"
+            className="tab"
+            aria-label=" Update News"
+          />
+          <div className="tab-content  p-4">
+            <UpdateNews />
           </div>
         </>
       )}

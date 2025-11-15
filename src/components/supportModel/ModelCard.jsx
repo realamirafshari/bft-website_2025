@@ -1,14 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { IoIosPhonePortrait } from "react-icons/io";
 
 const ModelCard = ({ item }) => {
   return (
     <div
-      className="  rounded-2xl p-4 md:p-6 border border-base-300  duration-300 flex flex-col transform hover:-translate-y-1 transition-all"
+      className="  rounded-2xl p-4 md:p-6 border border-base-300 flex flex-col transform hover:-translate-y-1 transition-all"
     >
       {/* Image Container */}
-      <div className="w-full h-40 md:h-48 flex items-center justify-center bg-linear-to-br from-base-200 to-base-300 rounded-xl mb-4 md:mb-5 overflow-hidden p-3 border border-gray-100">
+      <div className="w-full h-40 md:h-48 flex items-center justify-center bg-linear-to-br from-base-200 to-base-300 rounded-xl mb-4 md:mb-5 overflow-hidden p-3 border border-base-300">
         {item.image && item.image.startsWith("http") ? (
           <Image
             src={item.image}
@@ -62,10 +63,10 @@ const ModelCard = ({ item }) => {
       </div>
 
       {/* Button */}
-      <button className="mt-4 md:mt-6 w-full bg-primary text-white py-2.5 md:py-3 rounded-xl hover:bg-secondary hover:cursor-pointer duration-300 font-medium shadow-md hover:shadow-lg transition-all flex items-center justify-center text-sm md:text-base">
+      <Link href={`/phone-details/${item.modelName}`} className="mt-4 md:mt-6 w-full bg-primary text-white py-2.5 md:py-3 rounded-xl hover:bg-secondary hover:cursor-pointer duration-300 font-medium shadow-md hover:shadow-lg transition-all flex items-center justify-center text-sm md:text-base">
         <span>View Details</span>
         
-      </button>
+      </Link>
     </div>
   );
 };
