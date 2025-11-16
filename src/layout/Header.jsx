@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LuSunMedium, LuMoon, LuMenu } from "react-icons/lu";
 
-import NotificationHeader from "@/components/Home/NotificationHeader";
+// import NotificationHeader from "@/components/Home/NotificationHeader";
 import { useSession } from "next-auth/react";
 
 const Header = () => {
@@ -116,7 +116,7 @@ const Header = () => {
         </div>
       </header>
 
-      <NotificationHeader />
+      {/* <NotificationHeader /> */}
     </>
   );
 };
