@@ -62,10 +62,30 @@ const Footer = () => {
           <a className="link link-hover">Privacy policy</a>
           <a className="link link-hover">Cookie policy</a>
         </nav>
+
+        <nav>
+          <h6 className="footer-title">Authorized Resellers</h6>
+
+          <Link
+            href="https://telegram.me/HTSupport"
+            className="link link-hover"
+          >
+            Telegram: @HTSupport
+          </Link>
+
+          <Link
+            href="https://server.halabtech.com/"
+            className="link link-hover"
+          >
+            Official Website: server.halabtech.com
+          </Link>
+
+          <p className="link link-hover">Email: halabtech.cert@gmail.com</p>
+        </nav>
       </footer>
-      <h1 className="h-12 flex justify-center items-center">© {currentYear} BFT Team - All rights reserved</h1>
-
-
+      <h1 className="h-12 flex justify-center items-center">
+        © {currentYear} BFT Team - All rights reserved
+      </h1>
     </>
   );
 };

@@ -12,7 +12,7 @@ const Tabbar = async () => {
     <div className="tabs tabs-border">
       <input
         type="radio"
-        name="my_tabs_2"
+        name="my_tabs"
         className="tab "
         aria-label="User Information"
         defaultChecked
@@ -25,7 +25,7 @@ const Tabbar = async () => {
         <>
           <input
             type="radio"
-            name="my_tabs_2"
+            name="my_tabs"
             className="tab"
             aria-label="Phone Brand"
           />
@@ -35,7 +35,7 @@ const Tabbar = async () => {
 
           <input
             type="radio"
-            name="my_tabs_2"
+            name="my_tabs"
             className="tab"
             aria-label=" Support Models"
           />
@@ -45,13 +45,14 @@ const Tabbar = async () => {
 
           <input
             type="radio"
-            name="my_tabs_2"
+            name="my_tabs"
             className="tab"
             aria-label=" Update News"
           />
           <div className="tab-content  p-4">
             <UpdateNews />
           </div>
+
         </>
       )}
     </div>
