@@ -2,12 +2,9 @@ import "./globals.css";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
 import NextAuthProvider from "@/providers/NextAuthProvider";
-import Head from "next/head";
+import { metadataConfig } from "@/utils/metadataConfig";
 
-export const metadata = {
-  title: "Brutal Forensic Tool",
-  description: "Professional Mobile Forensic Tool ",
-};
+export const metadata = metadataConfig.homepage
 
 export default function RootLayout({ children }) {
   // data-theme="dark"

@@ -1,8 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
-import React from "react";
-
-const UserInformation = async ({session}) => {
+const UserInformation = async ({ session }) => {
   return (
     <div className="flex justify-center items-center">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full sm:w-xs  border p-4">

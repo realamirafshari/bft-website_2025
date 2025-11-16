@@ -4,6 +4,11 @@ import SignOut from "@/template/authPage/SignOut";
 import { FaUserLarge } from "react-icons/fa6";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { metadataConfig } from "@/utils/metadataConfig";
+
+export const metadata = metadataConfig.profile
+
+
 
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);

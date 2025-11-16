@@ -1,5 +1,3 @@
-import React from "react";
-
 const SectionTitle = ({ titleText }) => {
   return (
     <div className=" flex items-center justify-center ">

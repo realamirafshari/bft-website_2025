@@ -1,5 +1,7 @@
 import PhoneModelPage from "@/template/ModelsPage/PhoneModelPage";
+import { metadataConfig } from "@/utils/metadataConfig";
 
+export const metadata = metadataConfig.models
 
 const page = async () => {
 

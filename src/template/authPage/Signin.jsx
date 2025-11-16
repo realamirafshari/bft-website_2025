@@ -8,8 +8,8 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Signin = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("amirafshari02@gmail.com");
-  const [password, setPassword] = useState("Amir_Afshari#1382");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const signinHandler = async (e) => {
