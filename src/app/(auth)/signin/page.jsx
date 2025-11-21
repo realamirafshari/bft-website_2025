@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export const metadata = metadataConfig.signin;
 const SigninPage = async () => {
   const session = await getServerSession(authOptions);
-  if (session) redirect("/");
+  if (session) redirect("profile");
   return (
     <div>
       <Signin />

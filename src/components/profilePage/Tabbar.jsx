@@ -1,5 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import AddUser from "@/template/profilePage/AddUser";
+import DownloadSoftwarePage from "@/template/profilePage/DownloadSoftwarePage";
 import PhoneBrandsSetting from "@/template/profilePage/PhoneBrandsSetting";
+import ResellersPage from "@/template/profilePage/Resellers";
 import SupportModels from "@/template/profilePage/SupportModels";
 import UpdateNews from "@/template/profilePage/UpdateNews";
 import UserInformation from "@/template/profilePage/UserInformation";
@@ -20,9 +23,27 @@ const Tabbar = async () => {
       <div className="tab-content  p-4">
         <UserInformation session={session} />
       </div>
+      <input
+        type="radio"
+        name="my_tabs"
+        className="tab "
+        aria-label="Download Software"
+      />
+      <div className="tab-content  p-4">
+        <DownloadSoftwarePage />
+      </div>
 
       {session.user.role === "admin" && (
         <>
+          <input
+            type="radio"
+            name="my_tabs"
+            className="tab"
+            aria-label="Add User"
+          />
+          <div className="tab-content  p-4">
+            <AddUser />
+          </div>
           <input
             type="radio"
             name="my_tabs"
@@ -53,6 +74,15 @@ const Tabbar = async () => {
             <UpdateNews />
           </div>
 
+          <input
+            type="radio"
+            name="my_tabs"
+            className="tab"
+            aria-label="Resellers"
+          />
+          <div className="tab-content p-4">
+            <ResellersPage />
+          </div>
         </>
       )}
     </div>

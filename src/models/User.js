@@ -2,12 +2,12 @@ import { model, models, Schema } from "mongoose";
 
 const userSchema = new Schema(
   {
-    fullName: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    userID: { type: String, required: true, unique: true },
+    email: { type: String },
+    fullName: { type: String },
+    password: { type: String },
     role: { type: String, enum: ["user", "admin"], default: "user" },
-    isVerified: { type: Boolean, default: false },
-
+    isVerified: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

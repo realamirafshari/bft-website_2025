@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { FaUserLarge, FaAt, FaLock } from "react-icons/fa6";
 import VerifyOtp from "./VerifyOtp";
 import Link from "next/link";
@@ -45,7 +45,7 @@ const Signup = () => {
 
   return (
     <div className="py-32 flex justify-center">
-      <Toaster position="top-center" />
+      
 
       {step === 1 && (
         <form className="flex justify-center" onSubmit={signupHandler}>

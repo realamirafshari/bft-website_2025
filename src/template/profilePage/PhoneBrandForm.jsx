@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const PhoneBrandForm = () => {
   const [brandName, setBrandName] = useState("");
@@ -30,7 +30,6 @@ const PhoneBrandForm = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <Toaster />
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full sm:w-xs  border p-4">
         <legend className="fieldset-legend">Phone Brand Form</legend>
 

@@ -46,14 +46,24 @@ const Footer = () => {
           >
             Instagram
           </Link>
-          <Link className="link link-hover" href={"#"}>
+          <Link
+            className="link link-hover"
+            href="mailto:brutalforensictool@gmail.com?subject=Hello&body=Hi there!"
+          >
             Email
           </Link>
+
           <Link
             className="link link-hover"
             href={"https://x.com/brutalforensic"}
           >
             X - (Twitte)
+          </Link>
+          <Link
+            className="link link-hover"
+            href={"https://www.youtube.com/@brutalforensictoolteam"}
+          >
+            Youtube
           </Link>
         </nav>
         <nav>
@@ -61,26 +71,6 @@ const Footer = () => {
           <a className="link link-hover">Terms of use</a>
           <a className="link link-hover">Privacy policy</a>
           <a className="link link-hover">Cookie policy</a>
-        </nav>
-
-        <nav>
-          <h6 className="footer-title">Authorized Resellers</h6>
-
-          <Link
-            href="https://telegram.me/HTSupport"
-            className="link link-hover"
-          >
-            Telegram: @HTSupport
-          </Link>
-
-          <Link
-            href="https://server.halabtech.com/"
-            className="link link-hover"
-          >
-            Official Website: server.halabtech.com
-          </Link>
-
-          <p className="link link-hover">Email: halabtech.cert@gmail.com</p>
         </nav>
       </footer>
       <h1 className="h-12 flex justify-center items-center">

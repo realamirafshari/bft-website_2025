@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const UpdateNewsForm = ({
   editingItem,
@@ -124,7 +124,7 @@ const UpdateNewsForm = ({
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <Toaster />
+    
       <div className="card bg-base-100">
         <div className="card-body">
           <h1 className="card-title text-3xl font-bold mb-2">

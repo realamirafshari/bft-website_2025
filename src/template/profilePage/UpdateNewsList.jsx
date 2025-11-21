@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { FaPen, FaTrash } from "react-icons/fa6";
 
 const UpdateNewsList = ({ updateList, setUpdateList, setEditingItem }) => {
@@ -29,7 +28,7 @@ const UpdateNewsList = ({ updateList, setUpdateList, setEditingItem }) => {
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <Toaster />
+
       <h2 className="text-2xl font-bold mb-6">Update News List</h2>
 
       {updateList.length === 0 ? (

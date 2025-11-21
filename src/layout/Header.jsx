@@ -11,7 +11,6 @@ import { useSession } from "next-auth/react";
 const Header = () => {
   const { data } = useSession();
   const [theme, setTheme] = useState("dark");
-
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme);
@@ -52,17 +51,20 @@ const Header = () => {
               <li>
                 <Link href="/whats-new">Whats New</Link>
               </li>
+              <li>
+                <Link href="/resellers">resellers</Link>
+              </li>
               <div className="divider"></div>
               {data ? (
                 <Link
                   className="btn btn-outline w-full btn-primary hover:text-primary-content "
                   href={"/profile"}
                 >
-                  Hello , {data.user.fullName}
+                  Hello , {data.user.userID}
                 </Link>
               ) : (
                 <Link href="/signin" className="btn btn-primary ">
-                  Signin/Signup
+                  Register
                 </Link>
               )}
             </ul>
@@ -84,6 +86,9 @@ const Header = () => {
             <li>
               <Link href="/whats-new">Whats New</Link>
             </li>
+            <li>
+                <Link href="/resellers">resellers</Link>
+              </li>
           </ul>
         </div>
 
@@ -103,14 +108,14 @@ const Header = () => {
               className="btn btn-outline btn-primary hover:text-primary-content hidden lg:flex ml-4"
               href={"/profile"}
             >
-              Hello , {data.user.fullName}
+              Hello , {data.user.userID}
             </Link>
           ) : (
             <Link
               href="/signin"
               className="btn btn-primary hidden lg:flex ml-4 "
             >
-              Signin/Signup
+              Register
             </Link>
           )}
         </div>

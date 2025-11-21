@@ -4,23 +4,23 @@ const UserInformation = async ({ session }) => {
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full sm:w-xs  border p-4">
         <legend className="fieldset-legend">User Information</legend>
 
-        <label className="label">Email</label>
+        <label className="label">BFT User ID</label>
         <input
-          type="email"
+          type="test"
           className="input"
-          placeholder="Email"
-          value={session.user.email}
+          placeholder="BFT Uset ID"
+          value={session.user.userID}
           disabled
         />
 
-        <label className="label">Password</label>
+        {/* <label className="label">Password</label>
         <input
           type="password"
           className="input"
           placeholder="Password"
           value={"............"}
           disabled
-        />
+        /> */}
 
         <button className="btn btn-disabled mt-4">Update Information</button>
       </fieldset>

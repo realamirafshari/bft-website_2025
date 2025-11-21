@@ -1,5 +1,5 @@
 "use client";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { FaPen, FaTrash } from "react-icons/fa6";
 import { IoIosPhonePortrait } from "react-icons/io";
 
@@ -28,7 +28,6 @@ const SupportModelsList = ({ modelList, onEdit, onDelete }) => {
 
   return (
     <div>
-      <Toaster />
       {modelList.map((model) => (
         <ul key={model._id} className="list gap-2 rounded-box shadow-sm mt-4">
           <li className="list-row flex items-center justify-between">

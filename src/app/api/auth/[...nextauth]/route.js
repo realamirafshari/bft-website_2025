@@ -1,28 +1,29 @@
+import User from "@/models/User";
+import { connectDB } from "@/utils/connectDB";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectDB } from "@/utils/connectDB";
-import User from "@/models/User";
-import { verifyValue } from "@/utils/authentication";
 
 export const authOptions = {
   session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const { email, password } = credentials;
+        const { userID } = credentials;
         await connectDB();
 
-        if (!email || !password) {
-          throw new Error("Please enter valid information");
+        if (!userID) {
+          throw new Error("Please enter a valid User ID");
         }
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ userID });
         if (!user) throw new Error("User not found");
 
-        const isValid = await verifyValue(password, user.password);
-        if (!isValid) throw new Error("Incorrect email or password.");
-
-        return { email: user.email, role: user.role, fullName: user.fullName };
+        // این مقادیر داخل token ذخیره می‌شود
+        return {
+          id: user._id.toString(), // برای مرجع دیتابیس
+          userID: user.userID, // مقدار userID واقعی
+          role: user.role,
+        };
       },
     }),
   ],
@@ -30,16 +31,16 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.userID = user.userID;
         token.role = user.role;
-        token.fullName = user.fullName;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
+        session.user.userID = token.userID;
         session.user.role = token.role;
-        session.user.fullName = token.fullName;
       }
       return session;
     },

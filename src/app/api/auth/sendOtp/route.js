@@ -34,7 +34,7 @@ export async function POST(req) {
     });
 
     await transporter.sendMail({
-      from: `"BFT Team" <no-reply@bft.com>`,
+      from: `"BFT Team" <brutalforensictool@gmail.com>`,
       to: email,
       subject: "BFT Verification Code",
       html: `

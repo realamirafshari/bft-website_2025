@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SupportModelsForm = ({ brand, editModel, onUpdate }) => {
   const [brandName, setBrandName] = useState("");
@@ -78,7 +78,7 @@ const SupportModelsForm = ({ brand, editModel, onUpdate }) => {
 
   return (
     <div className="flex gap-4">
-      <Toaster />
+   
       <form
         onSubmit={submitHandler}
         className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"

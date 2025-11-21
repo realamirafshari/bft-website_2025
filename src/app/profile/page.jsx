@@ -6,9 +6,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { metadataConfig } from "@/utils/metadataConfig";
 
-export const metadata = metadataConfig.profile
-
-
+export const metadata = metadataConfig.profile;
 
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
@@ -28,9 +26,6 @@ const ProfilePage = async () => {
           <h1 className="text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent sm:text-5xl">
             Dashboard
           </h1>
-          <p className="mt-4 text-xl text-base-content/80 max-w-2xl mx-auto leading-relaxed">
-            Welcome back !
-          </p>
         </div>
 
         {/* Main Card */}
@@ -43,7 +38,7 @@ const ProfilePage = async () => {
                   <div className="avatar avatar-online w-20 h-20 bg-white/20  flex items-center justify-center backdrop-blur-sm border-2 border-primary rounded-full">
                     <div className="w-24 rounded-full flex justify-center items-center">
                       <span className="text-2xl font-bold text-white">
-                        {(session.user.fullName || "User")
+                        {(session.user.userID || "User")
                           .charAt(0)
                           .toUpperCase()}
                       </span>
@@ -52,11 +47,9 @@ const ProfilePage = async () => {
 
                   <div className="space-y-1 text-center md:text-start">
                     <h2 className="text-2xl font-bold text-white">
-                      {session.user.fullName || "User"}
+                      {session.user.userID || "Bft User"} , Welcome
                     </h2>
-                    <div className="flex items-center space-x-2 mb-4 lg:mb-0">
-                      <p className="text-white/80 ">{session.user.email}</p>
-                    </div>
+
                     <SignOut />
                   </div>
                 </div>

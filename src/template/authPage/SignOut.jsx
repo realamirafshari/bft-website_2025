@@ -6,7 +6,7 @@ const SignOut = () => {
   const [isLoading, setIsLoading] = useState(false);
   const signOutHandler = async () => {
     setIsLoading(true);
-    await signOut();
+    await signOut({ redirect: "/" });
     setIsLoading(false);
   };
 
