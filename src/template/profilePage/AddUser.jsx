@@ -30,11 +30,12 @@ const AddUser = () => {
     if (searchTerm.trim() === "") {
       setFilteredUsers(userList);
     } else {
-      const filtered = userList.filter(user =>
-        user.userID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.role?.toLowerCase().includes(searchTerm.toLowerCase())
+      const filtered = userList.filter(
+        (user) =>
+          user.userID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.role?.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredUsers(filtered);
     }
@@ -60,7 +61,9 @@ const AddUser = () => {
 
     try {
       const method = editingUserId ? "PATCH" : "POST";
-      const url = editingUserId ? `/api/auth/user/${editingUserId}` : "/api/auth/user";
+      const url = editingUserId
+        ? `/api/auth/user/${editingUserId}`
+        : "/api/auth/user";
 
       const res = await fetch(url, {
         method,
@@ -122,14 +125,16 @@ const AddUser = () => {
     }
 
     try {
-      const res = await fetch(`/api/auth/user/${id}`, {
+      const res = await fetch(`/api/auth/user`, {
         method: "DELETE",
+        body: JSON.stringify({ id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        toast.error(data.message || "Error deleting user");
+        toast.error("Error deleting user");
         return;
       }
 
@@ -239,15 +244,18 @@ const AddUser = () => {
                       <div className="space-y-2">
                         <label className="flex items-center text-sm font-semibold">
                           Password
-                          {!editingUserId && <span className="text-error ml-1">*</span>}
+                          
                         </label>
                         <input
                           type="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder={editingUserId ? "Leave blank to keep current password" : "Enter password"}
+                          placeholder={
+                            editingUserId
+                              ? "Leave blank to keep current password"
+                              : "Enter password"
+                          }
                           className="w-full px-4 py-3 border border-base-300 outline-none rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 bg-base-200"
-                          required={!editingUserId}
                         />
                       </div>
 
@@ -294,7 +302,8 @@ const AddUser = () => {
                             <>
                               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                               <span>
-                                {editingUserId ? "Updating..." : "Creating..."} User
+                                {editingUserId ? "Updating..." : "Creating..."}{" "}
+                                User
                               </span>
                             </>
                           ) : (
@@ -311,7 +320,9 @@ const AddUser = () => {
                                   clipRule="evenodd"
                                 />
                               </svg>
-                              <span>{editingUserId ? "Update User" : "Create User"}</span>
+                              <span>
+                                {editingUserId ? "Update User" : "Create User"}
+                              </span>
                             </>
                           )}
                         </div>
@@ -346,11 +357,13 @@ const AddUser = () => {
                         onClick={() => setSearchTerm("")}
                         className="absolute inset-y-0 right-0 pr-3 flex items-center"
                       >
-                        <span className="text-base-content/50 hover:text-base-content">×</span>
+                        <span className="text-base-content/50 hover:text-base-content">
+                          ×
+                        </span>
                       </button>
                     )}
                   </div>
-                  
+
                   <div className="bg-info text-info-content px-4 py-2 rounded-full text-sm font-semibold">
                     <div className="flex items-center space-x-1">
                       <span>{filteredUsers.length} Users</span>
@@ -405,7 +418,9 @@ const AddUser = () => {
                                     <div className="w-10 h-10 bg-primary text-primary-content rounded-full flex items-center justify-center">
                                       <span className="font-bold text-sm">
                                         {user.fullName
-                                          ? user.fullName.charAt(0).toUpperCase()
+                                          ? user.fullName
+                                              .charAt(0)
+                                              .toUpperCase()
                                           : "U"}
                                       </span>
                                     </div>
@@ -549,7 +564,10 @@ const AddUser = () => {
                     <span className="font-semibold">
                       {Math.min(indexOfLastUser, filteredUsers.length)}
                     </span>{" "}
-                    of <span className="font-semibold">{filteredUsers.length}</span>{" "}
+                    of{" "}
+                    <span className="font-semibold">
+                      {filteredUsers.length}
+                    </span>{" "}
                     users
                     {searchTerm && (
                       <span className="opacity-70 ml-1">
@@ -562,7 +580,9 @@ const AddUser = () => {
                     {/* Previous Page Button */}
                     <button
                       className="join-item btn"
-                      onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+                      onClick={() =>
+                        currentPage > 1 && setCurrentPage(currentPage - 1)
+                      }
                       disabled={currentPage === 1}
                     >
                       «
@@ -601,7 +621,10 @@ const AddUser = () => {
                     {/* Next Page Button */}
                     <button
                       className="join-item btn"
-                      onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+                      onClick={() =>
+                        currentPage < totalPages &&
+                        setCurrentPage(currentPage + 1)
+                      }
                       disabled={currentPage === totalPages}
                     >
                       »
