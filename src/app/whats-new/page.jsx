@@ -1,9 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
-
-
 
 const WhatsNewPage = () => {
   const [changelogList, setChangelogList] = useState([]);
@@ -112,13 +111,13 @@ const WhatsNewPage = () => {
         ) : (
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/30 to-secondary/30 md:left-1/2 md:-translate-x-1/2"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/30 to-secondary/30 md:left-1/2 "></div>
 
             <div className="space-y-8">
               {changelogList.map((item, index) => (
                 <div
                   key={item._id || index}
-                  className={`relative flex items-center gap-8 ${
+                  className={`relative flex items-center gap-3 ${
                     index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
@@ -134,14 +133,14 @@ const WhatsNewPage = () => {
                   </div>
 
                   {/* Content Card */}
-                  <div className="flex-1">
+                  <div className="flex-1 ">
                     <div
-                      className={`bg-base-100 rounded-2xl p-8 shadow-lg border border-base-300/50 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] ${
+                      className={`bg-base-100  rounded-2xl p-6 shadow-lg border border-base-300/50  transition-all duration-300  ${
                         index === 0 ? "ring-2 ring-primary/20" : ""
                       }`}
                     >
                       {/* Header badges */}
-                      <div className="flex flex-wrap items-center gap-3 mb-6">
+                      <div className="flex  flex-wrap items-center gap-3 mb-6">
                         {index === 0 && (
                           <span className="badge badge-primary badge-lg font-semibold px-4 py-2 flex items-center gap-2">
                             <div className="w-2 h-2 bg-current rounded-full animate-ping"></div>
@@ -152,8 +151,8 @@ const WhatsNewPage = () => {
                           {formatDate(item.releaseDate)}
                         </span>
                         {item.version && (
-                          <span className="badge badge-outline badge-lg px-3 py-2 font-mono">
-                            v{item.version}
+                          <span className="badge badge-ghost badge-lg px-3 py-2 font-mono">
+                            version {item.version}
                           </span>
                         )}
                       </div>
@@ -177,16 +176,13 @@ const WhatsNewPage = () => {
                             <div className="w-2 h-2 bg-primary rounded-full"></div>
                             New Features
                           </h3>
-                          <ul className="space-y-3">
-                            {item.features.map((feature, idx) => (
+                          <ul className="space-y-3 ">
+                            {item.features.map((feature, index) => (
                               <li
-                                key={idx}
-                                className="flex gap-4 items-start group"
+                                key={index}
+                                className="flex gap-4 items-start group "
                               >
-                                <div className="w-2 h-2 bg-primary rounded-full mt-3 group-hover:scale-150 transition-transform"></div>
-                                <span className="text-base-content/90 text-base leading-relaxed">
-                                  {feature}
-                                </span>
+                                {feature}
                               </li>
                             ))}
                           </ul>
@@ -220,17 +216,18 @@ const WhatsNewPage = () => {
                       {item.supportDevice?.length > 0 && (
                         <div>
                           <h3 className="font-bold text-base-content mb-4 text-lg flex items-center gap-2">
-                            <div className="w-2 h-2 bg-success rounded-full"></div>
+                            <div className="w-2 h-2 bg-primary rounded-full"></div>
                             Supported Devices
                           </h3>
                           <div className="flex flex-wrap gap-3">
                             {item.supportDevice.map((device, idx) => (
-                              <span
+                              <Link
+                                href={`/phone-details/${device}`}
                                 key={idx}
-                                className="badge badge-outline badge-lg px-4 py-2 font-medium hover:bg-base-300 hover:text-base-content transition-colors"
+                                className="badge badge-outline px-4 py-2 text-xm font-medium hover:bg-base-300 hover:text-base-content transition-colors"
                               >
                                 {device}
-                              </span>
+                              </Link>
                             ))}
                           </div>
                         </div>
