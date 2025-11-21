@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { MdOutlinePassword } from "react-icons/md";
+import { MdOutlineLock, MdOutlinePassword } from "react-icons/md";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const Signin = () => {
   const router = useRouter();
   const [userID, setUserID] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const signinHandler = async (e) => {
@@ -23,6 +24,7 @@ const Signin = () => {
       setIsLoading(true);
       const res = await signIn("credentials", {
         userID,
+        password,
         redirect: false,
       });
 
@@ -62,6 +64,17 @@ const Signin = () => {
             required
             value={userID}
             onChange={(e) => setUserID(e.target.value)}
+          />
+        </label>
+
+        <label className="input validator">
+          <MdOutlineLock />
+          <input
+            type="text"
+            placeholder="Enter Your Password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
 

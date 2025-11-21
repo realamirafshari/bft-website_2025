@@ -61,25 +61,24 @@ const AddUser = () => {
 
     try {
       const method = editingUserId ? "PATCH" : "POST";
-      const url = editingUserId
-        ? `/api/auth/user/${editingUserId}`
-        : "/api/auth/user";
+      const url = "/api/auth/user"; // چون id در body هست، URL ثابت میمونه
 
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          id: editingUserId, // 👈 آیدی کاربر اینجا ارسال میشه
           userID,
           fullName,
           email: email || `${userID}@example.com`,
-          password: password || undefined, // Only send password if provided
+          password,
           role,
           isVerified,
         }),
       });
 
       const data = await res.json();
-
+      console.log("DATA",data)
       if (!res.ok) {
         toast.error(data.message || "Error");
         return;
@@ -87,14 +86,12 @@ const AddUser = () => {
 
       toast.success(
         editingUserId
-          ? "User updated successfully"
-          : "User created successfully"
+          ? `User updated successfully. ${data.message} `
+          : `User created successfully. ${data.message} `
       );
 
       // Refresh users list
       fetchUsers();
-
-      // Reset form
       resetForm();
     } catch {
       toast.error("Network error");
@@ -120,9 +117,6 @@ const AddUser = () => {
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
   const deleteHandler = async (id) => {
-    if (!confirm("Are you sure you want to delete this user?")) {
-      return;
-    }
 
     try {
       const res = await fetch(`/api/auth/user`, {
@@ -244,15 +238,17 @@ const AddUser = () => {
                       <div className="space-y-2">
                         <label className="flex items-center text-sm font-semibold">
                           Password
-                          
+                          {!editingUserId && (
+                            <span className="text-error ml-1">*</span>
+                          )}
                         </label>
                         <input
-                          type="password"
+                          type="test"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder={
                             editingUserId
-                              ? "Leave blank to keep current password"
+                              ? "Leave blank to keep current or generate random password"
                               : "Enter password"
                           }
                           className="w-full px-4 py-3 border border-base-300 outline-none rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 bg-base-200"
